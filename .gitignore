@@ -8,8 +8,10 @@ build/
 
 # In vision
 AI/Vision/Train/*
-!AI/Vision/Train/train.md
-!AI/Vision/Train/DNN/Videos/README.md
+!AI/Vision/Train/README.md
+
+AI/Vision/Train/DNN/*
+!AI/Vision/Train/DNN/avell.sh
 !AI/Vision/Train/DNN/check.py
 !AI/Vision/Train/DNN/extratc.py
 !AI/Vision/Train/DNN/generate_label.py
@@ -21,6 +23,9 @@ AI/Vision/Train/*
 !AI/Vision/Train/DNN/treinando_rede.sh
 !AI/Vision/Train/DNN/xml_to_csv.py
 !AI/Vision/Train/DNN/zipNetwork.sh
+
+AI/Vision/Train/DNN/Videos/*
+!AI/Vision/Train/DNN/Videos/README.md
 
 AI/Vision/Data/*
 
