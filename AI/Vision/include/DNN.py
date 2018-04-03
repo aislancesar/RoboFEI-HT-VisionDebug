@@ -51,7 +51,7 @@ class DNN(BasicProcesses):
 
     ## DIRECTORY_TRAINING_IMAGES
     # Directory where the training imagens will be saved.
-    __DIRECTORY_TRAINING_IMAGES = './Train'
+    __DIRECTORY_TRAINING_IMAGES = './Train/DNN'
 
     ## numclasses
     # The Number of classes that are detected by the network.

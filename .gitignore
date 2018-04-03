@@ -8,19 +8,19 @@ build/
 
 # In vision
 AI/Vision/Train/*
-!AI/Vision/Train/Videos
-!AI/Vision/Train/avell.sh
-!AI/Vision/Train/check.py
-!AI/Vision/Train/extratc.py
-!AI/Vision/Train/generate_label.py
-!AI/Vision/Train/generate_tfrecord.py
-!AI/Vision/Train/mobilenet_v1_1.0_224.tar.gz
-!AI/Vision/Train/README.md
-!AI/Vision/Train/rename.py
-!AI/Vision/Train/train.sh
-!AI/Vision/Train/treinando_rede.sh
-!AI/Vision/Train/xml_to_csv.py
-!AI/Vision/Train/zipNetwork.sh
+!AI/Vision/Train/train.md
+!RoboFEI-HT-VisionDebug/AI/Vision/Train/DNN/Videos/README.md
+!AI/Vision/Train/DNN/check.py
+!AI/Vision/Train/DNN/extratc.py
+!AI/Vision/Train/DNN/generate_label.py
+!AI/Vision/Train/DNN/generate_tfrecord.py
+!AI/Vision/Train/DNN/mobilenet_v1_1.0_224.tar.gz
+!AI/Vision/Train/DNN/README.md
+!AI/Vision/Train/DNN/rename.py
+!AI/Vision/Train/DNN/train.sh
+!AI/Vision/Train/DNN/treinando_rede.sh
+!AI/Vision/Train/DNN/xml_to_csv.py
+!AI/Vision/Train/DNN/zipNetwork.sh
 
 AI/Vision/Data/*
 
