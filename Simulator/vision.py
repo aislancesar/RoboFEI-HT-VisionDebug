@@ -131,7 +131,7 @@ class Vision():
             if (int(view_rot_aux) % 360) >= int(view_rot) - 1 and (int(view_rot_aux) % 360) <= int(view_rot) + 1:
                 bkb.write_int(mem, 'DECISION_SEARCH_ON', 0)  # stop searching
                 #print 'dist,pan', dist, ball_orient_wrt_robot
-                bkb.write_float(mem, 'VISION_BALL_DIST', dist)
+                # bkb.write_float(mem, 'VISION_BALL_DIST', dist)
                 bkb.write_float(mem, 'VISION_PAN_DEG', ball_orient_wrt_robot)
                 return view_rot_aux
             else:
