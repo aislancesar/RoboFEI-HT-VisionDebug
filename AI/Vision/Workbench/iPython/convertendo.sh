@@ -19,7 +19,7 @@ NC='\e[0m' # No Color
 
 echo -e "${Blue}Convertendo ipynb${NC}"
 sleep 1
-if !( jupyter nbconvert --to python *.ipynb )
+if !( ipython nbconvert --to python *.ipynb )
 then
 	echo -e "${Light_Red}"
 	read -p "Erro, precione qualquer tecla para finalizar"
