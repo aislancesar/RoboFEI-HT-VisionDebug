@@ -12,11 +12,11 @@
 
 # ---- Imports ----
 
-# Libraries to be used
+# Libraries to be used.
 import time
 import sys
 import os
-os.chdir('../../')
+os.chdir('../')
 sys.path.append('./include')
 sys.path.append('./src')
 
@@ -32,23 +32,9 @@ a = Argumentos()
 dnn = DNN(a)
 
 dicionario = {}
-os.system("mkdir ./Train/DNN/imagens\ to\ classify")
-
-try:
-    imagens = [i.rsplit(".", 1)[0] for i in os.listdir("./Train/DNN/imagens to classify")]
-    xmls = [i.rsplit(".", 1)[0] for i in os.listdir("./Train/DNN/annotations DNN")]
-    imagens = [i for i in imagens if i not in xmls]
-    for image in imagens:
-        dicionario["frame"] = cv2.imread("./Train/DNN/imagens to classify/"+image+".jpg")
-        dicionario["time"] = time.time()
-        dnn.detect(dicionario)
-        os.system("rm ./Train/DNN/imagens\ to\ classify/"+image.replace(":","\\:").replace(" ","\\ ")+".jpg")
-    cv2.destroyAllWindows()
-except:
-    pass
-
-for video in os.listdir("./Train/DNN/Videos"):
-    cap = cv2.VideoCapture("./Train/DNN/Videos/"+video)
+os.system("mkdir ./Train/imagens\ to\ classify")
+for video in os.listdir("./Train/Videos"):
+    cap = cv2.VideoCapture("./Train/Videos/"+video)
     while True:
         for __ in xrange(0, 4):
             __, dicionario["frame"] = cap.read()
@@ -56,4 +42,17 @@ for video in os.listdir("./Train/DNN/Videos"):
             break
         dicionario["time"] = time.time()
         dnn.detect(dicionario)
-    os.system("rm ./Train/DNN/Videos/"+video)
+    os.system("rm ./Train/Videos/"+video)
+
+try:
+    imagens = [i.rsplit(".", 1)[0] for i in os.listdir("./Train/imagens to classify")]
+    xmls = [i.rsplit(".", 1)[0] for i in os.listdir("./Train/annotations DNN")]
+    imagens = [i for i in imagens if i not in xmls]
+    for image in imagens:
+        dicionario["frame"] = cv2.imread("./Train/imagens to classify/"+image+".jpg")
+        dicionario["time"] = time.time()
+        dnn.detect(dicionario)
+        os.system("rm ./Train/imagens\ to\ classify/"+image.replace(":","\\:").replace(" ","\\ ")+".jpg")
+    cv2.destroyAllWindows()
+except:
+    pass
