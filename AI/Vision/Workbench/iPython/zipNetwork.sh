@@ -21,7 +21,7 @@ mkdir newRede
 cp ./models/rede/frozen_inference_graph.pb ./newRede/frozen_inference_graph.pb
 cp ./data/object-detection.pbtxt ./newRede/object-detection.pbtxt
 cd newRede
-rm ../../Data/newRede.tar.gz
-tar -czf ../../Data/newRede.tar.gz *
+rm ../../../Data/newRede.tar.gz
+tar -czf ../../../Data/newRede.tar.gz *
 cd ..
 rm -R newRede

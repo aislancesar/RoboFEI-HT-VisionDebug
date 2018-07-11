@@ -10,10 +10,10 @@ sys.path.append('./src')
 image = 1
 names = [i.rsplit(".", 1)[0].replace(" ", "\ ") for i in os.listdir("./Train/DNN/imagensTrain")]
 
-digits = 0
-size = len(names)
-while size > 0:
-    size /= 10
+digits = 0 
+size = len(names) 
+while size > 0: 
+    size /= 10 
     digits += 1
 
 for name in names:
@@ -33,10 +33,10 @@ for name in names:
 image = 1
 names = [i.rsplit(".", 1)[0].replace(" ", "\ ") for i in os.listdir("./Train/DNN/imagensTrain")]
 
-digits = 0
-size = len(names)
-while size > 0:
-    size /= 10
+digits = 0 
+size = len(names) 
+while size > 0: 
+    size /= 10 
     digits += 1
 
 for name in names:

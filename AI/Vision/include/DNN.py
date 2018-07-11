@@ -51,7 +51,7 @@ class DNN(BasicProcesses):
     
     ## DIRECTORY_TRAINING_IMAGES
     # Directory where the training imagens will be saved.
-    __DIRECTORY_TRAINING_IMAGES = './Train'
+    __DIRECTORY_TRAINING_IMAGES = './Train/DNN'
     
     ## numclasses
     # The Number of classes that are detected by the network.
@@ -238,7 +238,7 @@ class DNN(BasicProcesses):
         if self._args.train == True:
             cv2.imwrite(self.__DIRECTORY_TRAINING_IMAGES+'/imagens to classify/'+'Robot-'+ time.strftime('%d-%m-%Y %H:%M:%S', time.localtime(int(observation['time']))) + str(round(observation['time'] - int(observation['time']), 2))[1:] +'.jpg', image)
     
-            if len(objects.scores) != 0:        
+            if len(objects[(objects.scores > self.__parameters['threshold_to_train_min'])]) != 0:        
                 text = '<annotation>\n\t<folder>imagens to classify</folder>\n\t<filename>Robot-'+ time.strftime('%d-%m-%Y %H:%M:%S', time.localtime(int(observation['time']))) + str(round(observation['time'] - int(observation['time']), 2))[1:] +'.jpg</filename>\n\t<path>'+ os.getcwd() +'/'+ self.__DIRECTORY_TRAINING_IMAGES.split('/')[-1] +'/imagens to check/Robot-'+ time.strftime('%d-%m-%Y %H:%M:%S', time.localtime(int(observation['time']))) + str(round(observation['time'] - int(observation['time']), 2))[1:] +'.jpg</path>\n\t<source>\n\t\t<database>Unknown</database>\n\t</source>\n\t<size>\n\t\t<width>'+ str(image.shape[1]) +'</width>\n\t\t<height>'+ str(image.shape[0]) +'</height>\n\t\t<depth>'+ str(image.shape[2]) +'</depth>\n\t</size>\n\t<segmented>0</segmented>'
     
                 for classes, __, box in objects[(objects.scores > self.__parameters['threshold_to_train_min'])].values:

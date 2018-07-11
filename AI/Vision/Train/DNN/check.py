@@ -34,22 +34,22 @@ while key.upper() == "S":
             print "Não tem mais imagens para serem marcadas"
             time.sleep(1)
             break
-
+    
     # Organizando arquivos nas pastas
     os.system("mkdir ./Train/DNN/imagens\ to\ check")
     for files in xmls:
         os.system("mv ./Train/DNN/imagens\ to\ classify/"+files.replace(":", "\\:").replace(" ", "\\ ")+".jpg ./Train/DNN/imagens\ to\ check")
-
+    
     # Abrindo programa de marcação
     os.system("clear")
     os.system("python ~/labelImg/labelImg.py")# $(pwd)/Train/DNN/imagens\ to\ check/ $(pwd)/Train/DNN/annotations\ DNN/")
-
+    
     os.system("clear")
     key = raw_input("As marcações foram finalizadas ? [S/N]: ")
     if key.upper() == "N":
         os.system("mv ./Train/DNN/imagens\ to\ check/* ./Train/DNN/imagens\ to\ classify")
         break
-
+    
     # Finalizando marcações e separando classificações
     os.system("mkdir ./Train/DNN/annotations")
     os.system("mkdir ./Train/DNN/imagensTrain")
@@ -57,7 +57,7 @@ while key.upper() == "S":
     for files in xmls:
         os.system("mv ./Train/DNN/annotations\ DNN/"+files.replace(":", "\\:").replace(" ", "\\ ")+".xml ./Train/DNN/annotations")
         os.system('sed -i "s/imagens to check/imagensTrain/g" ./Train/DNN/annotations/'+files.replace(":", "\\:").replace(" ", "\\ ")+".xml")
-
+    
     os.system("clear")
     key = raw_input("Deseja checar/marcar mais " + str(num_files) + " imagens ? [S/N]: ")
 
