@@ -145,7 +145,15 @@ Arquivo de cabeçalho contendo as funções e definições do black board
 #define IMU_WORKING 126
 #define VOLTAGE 127
 #define DECISION_LOCALIZATION 128
-#define iVISION_FIELD 129
+#define LANDMARK_L_1: 129
+#define LANDMARK_L_2: 130
+#define LANDMARK_L_3: 131
+#define LANDMARK_L_4: 132
+#define LANDMARK_T_1: 133
+#define LANDMARK_T_2: 134
+#define LANDMARK_X_1: 135
+#define LANDMARK_X_2: 136
+#define LANDMARK_P: 137
 
 //---- TIPO FLOAT------------------------------
 #define IMU_GYRO_X 0

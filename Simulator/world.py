@@ -55,6 +55,9 @@ class SoccerField():
         #central circle
         pygame.draw.circle(self.screen.background,self.screen.WHITE,(520,370),75,5)
 
+        for i in ((520, 300), (520, 440), (250, 370), (780, 370)):
+            pygame.draw.circle(self.screen.background, (255,0,0), i, 10, 2)
+
         #penalty marks
         pygame.draw.line(self.screen.background,self.screen.WHITE,(775,370),(785,370), 7)
         pygame.draw.line(self.screen.background,self.screen.WHITE,(780,365),(780,375), 7)

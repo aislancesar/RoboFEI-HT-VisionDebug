@@ -38,6 +38,9 @@ class Simulation():
         for event in pygame.event.get():
             try:
             # if True:
+                if event.type == pygame.MOUSEBUTTONUP:
+                    print pygame.mouse.get_pos()
+
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
                     self.update_mouse_pos()
 

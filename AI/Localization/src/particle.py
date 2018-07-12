@@ -9,9 +9,12 @@ import time
 # field = ((8, 1032), (60, 680), (-180, 180))
 field = ((0, 1040), (0, 740), (-180, 180))
 
+lms = (((70, 70), (970, 70), (70, 670), (970, 670), (130, 200), (130, 540), (910, 200), (910, 540)),  # L
+       ((70, 200), (70, 540), (520, 70), (520, 670), (970, 540), (970, 200)),  # T
+       ((520, 300), (520, 440)),  # X
+       ((250, 370), (780, 370)))  # P
+
 #   Class implementing a particle used on Particle Filter Localization
-
-
 class Particle(object):
     #   Particle constructor
     def __init__(self,
@@ -167,7 +170,36 @@ class Particle(object):
     #   Likelihood computation
     def Sensor(self, z=None, weight=1):
         self.weight = weight
+        
+        if z is not None:
+            # Angle is equal to the arctan of (lm position - part position) minus the part orientation
+            for k in xrange(4):
+                LM = self.getLM(lms[k])
+                for i in z[k]:
+                    aux = None
+                    for j in LM:
+                        aux2 = ComputeAngLikelihoodDeg(i, j, 10)
+                        if aux is None or aux2 > aux:
+                            aux = aux2
+                    self.weight *= aux
+
+            self.weight *= ComputeAngLikelihoodDeg(z[4], self.rotation, 90)
+
         return self.weight
+
+    def getLM(self, vec):
+        ret = []
+
+        for i in vec:
+            aux = (np.degrees(np.arctan2(self.y - i[1], i[0] - self.x)) - self.rotation) % 360
+            if aux > 180:
+                aux %= 180
+            elif aux < -180:
+                aux = -((-aux) % 180)
+            ret.append(aux)
+
+        ret.sort()
+        return ret
 
     #   Returns a string to print the particle's representation.
     def __repr__(self):

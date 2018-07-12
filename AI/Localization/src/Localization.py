@@ -78,9 +78,14 @@ class Localization():
 
         PF = MonteCarlo(robot_id=self.robot_id)
 
+        # Erasing Shared memories values.
+        obs = ['LANDMARK_L_1', 'LANDMARK_L_2', 'LANDMARK_L_3', 'LANDMARK_L_4', 'LANDMARK_T_1', 'LANDMARK_T_2', 'LANDMARK_X_1', 'LANDMARK_X_2', 'LANDMARK_P']
+        for i in obs:
+            self.bkb.write_int(self.Mem, i, -999)
+
         std = 100
         hp = -999
-        self.bkb.write_int(self.Mem, 'DECISION_LOCALIZATION', -999)
+
         weight = 1
 
         # Main loop
@@ -97,9 +102,38 @@ class Localization():
             u = self.GetU(self.bkb.read_int(self.Mem, 'CONTROL_ACTION'))
 
             # Gets the measured variable from the blackboard,
-            # and free them.
+            z = []
+            auxz = []
+            for i in obs[:4]:
+                aux = self.bkb.read_int(self.Mem, i)
+                if aux == -999:
+                    aux = None
+                auxz.append(aux)
+            z.append(auxz)
 
-            pos, std = PF.main(u)
+            auxz = []
+            for i in obs[4:6]:
+                aux = self.bkb.read_int(self.Mem, i)
+                if aux == -999:
+                    aux = None
+                auxz.append(aux)
+            z.append(auxz)
+
+            auxz = []
+            for i in obs[6:8]:
+                aux = self.bkb.read_int(self.Mem, i)
+                if aux == -999:
+                    aux = None
+                auxz.append(aux)
+            z.append(auxz)
+
+            z.append(self.bkb.read_int(self.Mem, "IMU_EULER_Z",))
+
+            # and free them.
+            for i in obs:
+                self.bkb.write_int(self.Mem, i, -999)
+
+            pos, std = PF.main(u, z)
 
             if PF.meanweight < 1:
                 weight = np.log(0.05)/np.log(PF.meanweight)

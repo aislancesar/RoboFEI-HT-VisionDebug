@@ -203,7 +203,15 @@ class SharedMemory(object):
         "IMU_WORKING": 126,
         "VOLTAGE": 127,
         "DECISION_LOCALIZATION": 128,
-        "iVISION_FIELD": 129
+        "LANDMARK_L_1": 129,
+        "LANDMARK_L_2": 130,
+        "LANDMARK_L_3": 131,
+        "LANDMARK_L_4": 132,
+        "LANDMARK_T_1": 133,
+        "LANDMARK_T_2": 134,
+        "LANDMARK_X_1": 135,
+        "LANDMARK_X_2": 136,
+        "LANDMARK_P": 137
     }
 
     variable_float = {
