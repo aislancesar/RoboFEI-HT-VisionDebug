@@ -176,12 +176,13 @@ class Particle(object):
             for k in xrange(4):
                 LM = self.getLM(lms[k])
                 for i in z[k]:
-                    aux = None
-                    for j in LM:
-                        aux2 = ComputeAngLikelihoodDeg(i, j, 10)
-                        if aux is None or aux2 > aux:
-                            aux = aux2
-                    self.weight *= aux
+                    if i is not None:
+                        aux = None
+                        for j in LM:
+                            aux2 = ComputeAngLikelihoodDeg(i, j, 10)
+                            if aux is None or aux2 > aux:
+                                aux = aux2
+                        self.weight *= aux
 
             self.weight *= ComputeAngLikelihoodDeg(z[4], self.rotation, 90)
 
