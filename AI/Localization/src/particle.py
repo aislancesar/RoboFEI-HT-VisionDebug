@@ -174,12 +174,13 @@ class Particle(object):
         if z is not None:
             # Angle is equal to the arctan of (lm position - part position) minus the part orientation
             for k in xrange(4):
-                LM = self.getLM(lms[k])
+                LM = self.getLM(lms[k], False)
                 for i in z[k]:
                     if i is not None:
                         aux = None
                         for j in LM:
-                            aux2 = ComputeAngLikelihoodDeg(i, j, 10)
+                            # aux2 = ComputeAngLikelihoodDeg(i, j, 10)
+                            aux2 = ComputeDistLikelihood(i, j, 20)
                             if aux is None or aux2 > aux:
                                 aux = aux2
                         self.weight *= aux
@@ -188,15 +189,18 @@ class Particle(object):
 
         return self.weight
 
-    def getLM(self, vec):
+    def getLM(self, vec, angle=True):
         ret = []
 
         for i in vec:
-            aux = (np.degrees(np.arctan2(self.y - i[1], i[0] - self.x)) - self.rotation) % 360
-            if aux > 180:
-                aux %= 180
-            elif aux < -180:
-                aux = -((-aux) % 180)
+            if angle:
+                aux = (np.degrees(np.arctan2(self.y - i[1], i[0] - self.x)) - self.rotation) % 360
+                if aux > 180:
+                    aux %= 180
+                elif aux < -180:
+                    aux = -((-aux) % 180)
+            else:
+                aux = np.hypot(self.y - i[1], self.x - i[0])
             ret.append(aux)
 
         ret.sort()
@@ -244,6 +248,15 @@ def ComputeAngLikelihoodDeg(ang, base, std_deviation=0):
         # returns the likelihood between the given angles.
         return np.exp(-np.power(d, 2) / (2 * np.power(s, 2)))
 
+
+def ComputeDistLikelihood(x, mu, sig=0):
+    if sig == 0:
+        if x == mu:
+            return 1
+        else:
+            return 0
+    else:
+        return np.exp(-np.power(x - mu, 2) / (2 * np.power(sig, 2)))
 
 #   Returns a random number from a normal distribution.
 def NRnd(sigma, mu=0):

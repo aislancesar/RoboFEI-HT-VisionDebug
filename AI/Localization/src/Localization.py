@@ -127,6 +127,8 @@ class Localization():
                 auxz.append(aux)
             z.append(auxz)
 
+            z.append([self.bkb.read_int(self.Mem, obs[-1])])
+
             z.append(self.bkb.read_int(self.Mem, "IMU_EULER_Z",))
 
             # and free them.
